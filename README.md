@@ -4,6 +4,8 @@
 
 **[ブラウザーで遊ぶ](https://kaxic.github.io/shiosai-astral-labyrinth/)**
 
+[実際のプレイ映像を見る](https://kaxic.github.io/shiosai-astral-labyrinth/media/demo.mp4)
+
 ![星環の迷宮のゲーム画面](Guides/Astral.jpg)
 
 [遊び方と手動で拡張する方法](Guides/Astral.md)
