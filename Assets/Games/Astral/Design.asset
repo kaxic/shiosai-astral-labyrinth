@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cde763a7415b356449cee39cb01180d9, type: 3}
+  m_Name: Design
+  m_EditorClassIdentifier: Assembly-CSharp::StudioSkin
+  key: Astral
+  title: "\u661F\u74B0\u306E\u8FF7\u5BAE"
+  english: THE ASTRAL LABYRINTH
+  product: The Astral Labyrinth
+  introduction: "\u4E00\u6B69\u52D5\u3051\u3070\u3001\u661F\u306E\u756A\u4EBA\u3082\u4E00\u6B69\u9032\u3080\u3002\n\u6D88\u3048\u305F\u661F\u56F3\u3092\u63A2\u3057\u3001\u7720\u308C\u308B\u89B3\u6E2C\u6240\u306E\u5965\u3078\u3002"
+  controls: "\u77E2\u5370\u30FBWASD\u30671\u30DE\u30B9\u79FB\u52D5\u3002\u96A3\u306E\u6575\u306B\u5411\u304B\u3063\u3066\u6B69\u304F\u3068\u653B\u6483\u3002E\u3067\u5B9D\u7BB1\u30FB\u796D\u58C7\u30FB\u968E\u6BB5\u306A\u3069\u3092\u8ABF\u3079\u307E\u3059\u3002\n\nF
+    \u6295\u5149\u5075\u5BDF\u3000J \u8077\u6280\u3000Q \u85AC\u3000Space \u5F85\u6A5F\u3000Tab
+    \u6226\u8853\u56F3\u3000B \u822A\u884C\u9332\u3002\n\u51FA\u767A\u524D\u306F\u77E2\u5370\u3068Enter\u3067\u8077\u696D\u3092\u9078\u3073\u307E\u3059\u3002\u901A\u5E38\u8E0F\u7834\u5F8C\u306FC\u3067\u5909\u5247\u6761\u4EF6\u3092\u5909\u66F4\u3067\u304D\u307E\u3059\u3002"
+  accent: {r: 0.8509804, g: 0.7176471, b: 0.4862745, a: 1}
+  ink: {r: 0.08627451, g: 0.12941177, b: 0.21960784, a: 1}
+  paper: {r: 0.93333334, g: 0.93333334, b: 0.8666667, a: 1}
+  cover: {fileID: 2800000, guid: 366161026393b634cb945aa9879a9c4b, type: 3}
+  illustrations: {fileID: 2800000, guid: 0b1be7a9b9819a141a7071566ccd493c, type: 3}
+  specimenPlate: {fileID: 2800000, guid: 9b15adf76bf844341866cc596581e21b, type: 3}
+  music: {fileID: 8300000, guid: 61713319a0319a2428d03a5c6835a742, type: 3}
+  activityMusic: {fileID: 8300000, guid: d4968eae8013e5b45b9cc6187998ff2d, type: 3}
+  effects:
+  - {fileID: 8300000, guid: 912fa7188c46f3c4faf586e3640d0a7d, type: 3}
+  - {fileID: 8300000, guid: 532b3df68ddbc2c4fb2f3b5c8b039495, type: 3}
+  - {fileID: 8300000, guid: 7a7240e41f9c8f24bbe6309a0512b31e, type: 3}
+  - {fileID: 8300000, guid: dfda7948bfcdfdb4ab69b8644aa71be0, type: 3}
+  - {fileID: 8300000, guid: b56099837a12de740b701fe972916542, type: 3}
