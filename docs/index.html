@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#15272a"><title>星環の迷宮 | 潮彩作品集</title>
-  <link rel="icon" href="icon.png"><link rel="stylesheet" href="player.css">
+  <link rel="icon" href="icon.png"><link rel="stylesheet" href="player.css"><link rel="stylesheet" href="touch.css"><script defer src="touch.js"></script>
 </head>
 <body>
 <header><span class="imprint">潮彩作品集</span><a href="https://github.com/kaxic/shiosai-astral-labyrinth">GitHub ↗</a></header>
 <main>
   <section id="stage" aria-label="ゲーム画面">
-    <canvas id="game" width="1280" height="720" tabindex="0" aria-label="星環の迷宮のゲーム画面"></canvas>
+    <canvas id="game" data-game="Astral" width="1280" height="720" tabindex="0" aria-label="星環の迷宮のゲーム画面"></canvas>
     <div id="cover">
       <div class="titleblock"><p class="genre">ターン制ローグライク</p><h1>星環の迷宮</h1><p class="intro">一歩動けば、星の番人も一歩進む。
 消えた星図を探し、眠れる観測所の奥へ。</p>
@@ -36,7 +36,7 @@ const meter=document.getElementById('meter');
 let instance=null;
 const build='Build/';
 const config={
-  dataUrl:build+'Browser.data.unityweb',frameworkUrl:build+'Browser.framework.js.unityweb',codeUrl:build+'Browser.wasm.unityweb',
+  dataUrl:build+'3f8aaff2dc488742eff101b8bc19b105.data.unityweb',frameworkUrl:build+'00b8320ffdca3247ae38694e369a2215.framework.js.unityweb',codeUrl:build+'aee90177d51af4319604d5a474f58282.wasm.unityweb',
   streamingAssetsUrl:'StreamingAssets',companyName:'Shiosai Works',productName:'The Astral Labyrinth',productVersion:'1.0',
   devicePixelRatio:Math.min(1.5,window.devicePixelRatio||1),
   showBanner:function(message,type){ if(type==='error'){statusLine.textContent='読み込みに失敗しました。ページを再読み込みしてください。';console.error(message);} }
@@ -44,7 +44,7 @@ const config={
 async function startGame(){
   launchButton.disabled=true; statusLine.textContent='ゲームを読み込んでいます…';meter.hidden=false;
   try{
-    if(typeof createUnityInstance!=='function')await new Promise((resolve,reject)=>{const s=document.createElement('script'); s.src=build+'Browser.loader.js';s.onload=resolve;s.onerror=reject;document.head.appendChild(s);});
+    if(typeof createUnityInstance!=='function')await new Promise((resolve,reject)=>{const s=document.createElement('script'); s.src=build+'631dcd575bb543fb992c815b95303ef8.loader.js';s.onload=resolve;s.onerror=reject;document.head.appendChild(s);});
     instance=await createUnityInstance(canvas,config,value=>{meter.value=value;statusLine.textContent='読み込み中　'+Math.round(100*value)+'%';});
     cover.hidden=true;canvas.focus();document.body.classList.add('playing');
   }catch(e){statusLine.textContent='ゲームを開始できませんでした。WebGL 2に対応したブラウザーで再試行してください。';meter.hidden=true;launchButton.disabled=false;console.error(e);}

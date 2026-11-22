@@ -167,6 +167,10 @@ public sealed class AstralHud
         {
             case 1: return "狙ったマスへ攻撃";
             case 2: return "直線攻撃";
+              case 4: return "羽粉の対角印";
+              case 5: return "中心が安全な波紋";
+              case 6: return "周囲一帯の震動";
+              case 7: return "角雷の飛び石";
             case 3: return "周囲に攻撃";
             default: return "移動・索敵";
         }
@@ -300,10 +304,11 @@ public sealed class AstralHud
         recordIndex = Mathf.Clamp(recordIndex, 0, AstralGame.FoeNames.Length-1);
         for (int i = 0; i < AstralGame.FoeNames.Length; i++)
         {
-            var r = new Rect(sx, sy + i * 35, width, 30);
+            float cell = (width - 5) / 2;
+            var r = new Rect(sx + (i / 5) * (cell + 5), sy + (i % 5) * 35, cell, 30);
             bool known = game.HasSeenFoe(i);
             ChoiceFrame(r, i == recordIndex, true);
-            Label(known ? AstralGame.FoeNames[i] : "未観測", r.x + 10, r.y + 1, width - 20, 29, 14, known ? Ivory : Mist);
+            Label(known ? AstralGame.FoeNames[i] : "未観測", r.x + 5, r.y + 1, r.width - 10, 29, 14, known ? Ivory : Mist);
             if (Hit(r)) recordIndex = i;
         }
         float bx = sx + width + 13, bw = p.xMax - bx - 20;
@@ -384,6 +389,13 @@ public sealed class AstralHud
 
     void Specimen(Rect frame, int index)
     {
+        if (index >= 5)
+        {
+            var outer = Resources.Load<Texture2D>("Astral/OuterSpecimens");
+            int cell = index - 5;
+            if (outer) GUI.DrawTextureWithTexCoords(frame,outer,new Rect((cell%3)/3f, .5f*(1-cell/3),1/3f,.5f));
+            return;
+        }
         var sheet = game.skin.specimenPlate;
         if (!sheet) return;
         // The engraved sheet uses a shorter upper row and a taller row for the standing figures.

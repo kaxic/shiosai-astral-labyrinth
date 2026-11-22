@@ -21,7 +21,70 @@ internal sealed class AstralMiniature
             case 4: PrismEye();break;
             case 5: Lynx();break;
             case 6: Priest(false);break;
-            default: Priest(true);break;
+            case 7: Priest(true);break;
+            case 8: LunarMoth();break;
+            case 9: Nautilus();break;
+            case 10: NightRaven();break;
+            case 11: BellCrab();break;
+            case 12: AntlerStag();break;
+        }
+    }
+    void LunarMoth()
+    {
+        I("B0C4CB",Metal);Jewel(0,.52f,0,.07f,.081f,.22f);
+        for(int s=-1;s<=1;s+=2)
+        {
+            I("D1DBE1",Enamel);m.Tri(At(s*.04f,.54f,.12f),At(s*.46f,.64f,.30f),At(s*.25f,.54f,-.13f),Vector3.up);
+            m.Tri(At(s*.04f,.52f,-.06f),At(s*.30f,.54f,-.12f),At(s*.38f,.49f,-.36f),Vector3.up);
+            I("A4A1D0",Metal);Rod(At(s*.04f,.56f,.10f),At(s*.42f,.64f,.27f),.017f,.004f);
+            I("ECDBB4",Luminous,.65f);Jewel(s*.23f,.608f,.135f,.053f,.018f,.049f);
+            Rod(At(s*.025f,.54f,.16f),At(s*.11f,.67f,.30f),.012f,.004f);
+        }
+    }
+    void Nautilus()
+    {
+        I("AECEBD",Enamel);Jewel(0,.22f,.08f,.20f,.12f,.32f);
+        I("679D83",Quartz);Jewel(0,.45f,-.04f,.25f,.23f,.15f,14);
+        I("E8CA94",Metal);Vector3 last=At(0,.45f,.112f);
+        for(int i=1;i<=33;i++)
+        {
+            float f=i/33f,a=f*Mathf.PI*4;Vector3 p=At(Mathf.Cos(a)*.21f*f,.45f+Mathf.Sin(a)*.19f*f,.113f);
+            Rod(last,p,.012f,.012f);last=p;
+        }
+        foreach(float s in new[]{-1f,1f})
+        {I("86C4AA",Enamel);Rod(At(s*.08f,.25f,.28f),At(s*.16f,.41f,.37f),.023f,.013f);I("C7EFCA",Luminous,.69f);Jewel(s*.16f,.41f,.37f,.029f,.032f,.028f);}
+    }
+    void NightRaven()
+    {
+        I("444769",Quartz);Jewel(0,.48f,0,.16f,.13f,.25f);Jewel(0,.62f,.19f,.118f,.119f,.12f);
+        I("DBA56A",Metal);Rod(At(0,.61f,.25f),At(0,.59f,.43f),.063f,.006f);
+        foreach(float s in new[]{-1f,1f})for(int wing=0;wing<2;wing++)
+        {
+            I(wing==0?"5F699B":"8584B6",Enamel);float z=.10f-wing*.18f;
+            m.Tri(At(s*.07f,.52f,z),At(s*(.51f-wing*.12f),.68f-wing*.08f,z-.11f),At(s*.23f,.49f,z-.23f),Vector3.up);
+            I("D5B578",Metal);Rod(At(s*.10f,.54f,z),At(s*.45f,.64f,z-.1f),.012f,.004f);
+        }
+    }
+    void BellCrab()
+    {
+        I("C7A05B",Metal);m.Drum(0,.21f,-.02f,.25f,.12f,.22f,12);m.Drum(0,.20f,-.02f,.29f,.26f,.07f,12);
+        I("E6CB8D",Metal);Jewel(0,.45f,-.02f,.07f,.057f,.07f);
+        foreach(float s in new[]{-1f,1f})
+        {
+            for(int n=0;n<3;n++){float z=-.19f+n*.14f;I("986846",Metal);Rod(At(s*.16f,.23f,z),At(s*.34f,.08f,z-.035f),.033f,.018f);}
+            I("D5A66A",Metal);Rod(At(s*.16f,.21f,.08f),At(s*.33f,.31f,.24f),.046f,.05f);
+            Rod(At(s*.33f,.31f,.24f),At(s*.39f,.40f,.35f),.063f,.009f);Rod(At(s*.33f,.31f,.24f),At(s*.27f,.39f,.33f),.048f,.008f);
+        }
+    }
+    void AntlerStag()
+    {
+        I("75627D",Quartz);Jewel(0,.43f,-.016f,.149f,.14f,.28f);
+        Rod(At(0,.46f,.16f),At(0,.69f,.22f),.095f,.07f);Jewel(0,.71f,.25f,.10f,.098f,.14f);
+        foreach(float s in new[]{-1f,1f})
+        {
+            foreach(float z in new[]{-.16f,.14f}){I("695B76",Quartz);Rod(At(s*.092f,.40f,z),At(s*.14f,.055f,z+.024f),.041f,.022f);}
+            I("DCC9EF",Quartz,.45f);var b=At(s*.25f,.96f,.20f);Rod(At(s*.055f,.76f,.20f),b,.032f,.024f);
+            Rod(b,At(s*.33f,1.13f,.14f),.024f,.004f);Rod(b,At(s*.19f,1.08f,.31f),.02f,.004f);
         }
     }
     void Hero(int job)

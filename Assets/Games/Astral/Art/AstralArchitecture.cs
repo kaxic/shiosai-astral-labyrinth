@@ -10,13 +10,13 @@ internal sealed class AstralArchitecture
     readonly Finish rock;
     public AstralArchitecture(AstralMesh mesh,int floor)
     {
-        m=mesh;theme=Mathf.Min(3,(Mathf.Max(1,floor)-1)/2);
-        paving=new[]{"7B889B","688C98","8A8096","7785A2"}[theme];
-        wall=new[]{"4B5A74","466D79","5D4D69","4D5879"}[theme];
-        cap=new[]{"788499","72909A","87728C","8188A6"}[theme];
-        crown=new[]{"53647C","476C78","615970","555F80"}[theme];
-        trim=new[]{"AE9B70","A2B5A0","C59676","C9B079"}[theme];
-        soul=new[]{"9FE0DE","A6E3FC","F2A7BC","F9DB94"}[theme];
+        m=mesh;theme=floor<8?(Mathf.Max(1,floor)-1)/2:floor-4;
+        paving=new[]{"7B889B","688C98","8A8096","7785A2","73A29A","938C9F","B8A579"}[theme];
+        wall=new[]{"4B5A74","466D79","5D4D69","4D5879","436F73","5F577C","706A61"}[theme];
+        cap=new[]{"788499","72909A","87728C","8188A6","A6C5B4","C0AEC8","E3CE9E"}[theme];
+        crown=new[]{"53647C","476C78","615970","555F80","547E7B","716D89","8B806E"}[theme];
+        trim=new[]{"AE9B70","A2B5A0","C59676","C9B079","C2C59A","C7B0D8","E3BC76"}[theme];
+        soul=new[]{"9FE0DE","A6E3FC","F2A7BC","F9DB94","9DF0D2","D2BAFC","FFE4A0"}[theme];
         rock=theme==2?Quartz:theme==3?Enamel:Stone;
     }
     void Ink(string hex,Finish mat=Plain,float glow=0)=>m.Ink(hex,mat,glow);
@@ -49,6 +49,11 @@ internal sealed class AstralArchitecture
         if(detail==4 || detail==10)
         {
             Ink(trim,Metal);m.Star(At(.28f,.033f,.28f),detail==4?.080f:.053f,4,.13f);
+        }
+        if(theme>=4 && cell==AstralTile.Floor && (x==9 || z==7 || detail==0))
+        {
+            Ink(trim,Metal);m.Ring(At(0,.038f,0),.265f,.28f,theme==4?8:theme==5?12:24);
+            Ink(soul,Luminous,.42f);m.Star(At(0,.040f,0),.142f,theme==4?4:theme==5?6:8,.13f);
         }
         if(cell!=AstralTile.Floor)
         {

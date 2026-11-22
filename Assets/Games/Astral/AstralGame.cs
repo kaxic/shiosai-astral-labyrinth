@@ -57,11 +57,11 @@ public sealed class AstralGame : StudioGame
     public float Flash => Mathf.Clamp01(1 - (Time.unscaledTime - flashAt) * 4);
     public string LastAction => S.lastAction;
     public string LastLog => S.log;
-    public string FloorName => Floor <= 2 ? "天文廃苑" : Floor <= 4 ? "鏡水宮" : Floor <= 6 ? "緋晶工房" : "星冠中枢";
+    public string FloorName => Floor <= 2 ? "天文廃苑" : Floor <= 4 ? "鏡水宮" : Floor <= 6 ? "緋晶工房" : Floor == 7 ? "星冠中枢" : Floor == 8 ? "翠環水庭" : Floor == 9 ? "紫苑子午院" : "暁天の天文台";
     public string Loadout => S.relics.Count == 0 ? "遺物なし" : string.Join("・", S.relics.ConvertAll(i => AstralJourney.Charms[i]));
     public string Objective => Beacons == 0 ? "二つの星の碑のうち一基を灯そう" :
         !ExitReady ? "星冠の番人を退けて階段を開こう" : Floor == MaxFloor ? "階段に立ち、Eで星冠を灯そう" : "戦術図で階段を確かめ、Eで次の星環へ";
-    public string ResultText => Won ? (Challenge > 0 ? ChallengeNames[Challenge] + "を踏破。" : "七つの星環をつなぎ、変則航路が開いた。") +
+    public string ResultText => Won ? (Challenge > 0 ? ChallengeNames[Challenge] + "を踏破。" : "十の星環をつなぎ、変則航路が開いた。") +
         $" {Turn}手で星図を完成した。" : $"第{Floor}星環で灯が消えた。最高到達階と観測した魔物は航行録に残る。";
     public string Prompt
     {
@@ -134,7 +134,7 @@ public sealed class AstralGame : StudioGame
     }
     public void CycleChallenge()
     {
-        if (Wins == 0) { Notice("七つの星環を踏破すると変則航路が開きます"); return; }
+        if (Wins == 0) { Notice("十の星環を踏破すると変則航路が開きます"); return; }
         voyage.NextChallenge(); Tone(1); SaveCheckpoint();
     }
     public void NewVoyage() { voyage.Briefing(); Selection = Job; SaveCheckpoint(); }

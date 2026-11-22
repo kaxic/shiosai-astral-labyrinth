@@ -56,13 +56,13 @@ public static class AstralVerification
             }
             Check(run.S.mode == AstralMode.Result && run.S.won,
                 $"seed {seed}, job {run.S.job} should finish (floor {run.S.floor}, HP {run.S.hp}, turn {run.S.turn}, {run.S.log})");
-            Check(run.S.bestFloor == 7 && savedFight && savedShrine && lightUses > 0 && skills > 0, "boss, expedition and decisions");
+            Check(run.S.bestFloor == AstralChart.Summit && savedFight && savedShrine && lightUses > 0 && skills > 0, "boss, expedition and decisions");
             totalTurns += run.S.turn;
             // The result screen reuses the original seed and ship loadout.
             var replay = Restore(run); replay.Launch(replay.S.seed, replay.S.dailyDate);
             Check(SameMap(initial,replay.S.tiles) && replay.S.job == run.S.job && replay.S.challenge == run.S.challenge, "replay same chart");
         }
-        Check(run.S.wins == 4 && run.S.bestChallenge == 1 && run.S.challengeBits == 2 && run.S.foeBits == 31,
+        Check(run.S.wins == 4 && run.S.bestChallenge == 1 && run.S.challengeBits == 2 && run.S.foeBits == (1 << AstralJourney.Foes.Length) - 1,
             "three professions, all observed foes and postgame");
         var lost = Restore(run); lost.Briefing(); lost.Launch(132713);
         for (int i = 0; i < 500 && lost.S.mode == AstralMode.Explore; i++)
@@ -71,9 +71,9 @@ public static class AstralVerification
             if (watcher == null || watcher.alerted > 0 || watcher.intent > 0) lost.Wait();
             else Walk(lost, watcher.pos);
         }
-        Check(!lost.S.won && lost.S.mode == AstralMode.Result && lost.S.bestFloor == 7 && lost.S.foeBits == 31 &&
+        Check(!lost.S.won && lost.S.mode == AstralMode.Result && lost.S.bestFloor == AstralChart.Summit && lost.S.foeBits == (1 << AstralJourney.Foes.Length) - 1 &&
             lost.S.wins == 4, "defeat retains charting record");
-        Debug.Log($"Astral verification passed: 672 connected generated floors, all professions and twilight challenge cleared, " +
+        Debug.Log($"Astral verification passed: 960 connected generated floors, all professions and twilight challenge cleared, " +
             $"{totalTurns} committed turns, {totalRelics} altar choices, {totalDrinks} medicines, deterministic replay and expedition recovery.");
         return run.S;
     }
@@ -81,7 +81,7 @@ public static class AstralVerification
     static void VerifyCharts()
     {
         var shapes = new HashSet<int>();
-        for (int seed = 0; seed < 96; seed++) for (int floor = 1; floor <= 7; floor++)
+        for (int seed = 0; seed < 96; seed++) for (int floor = 1; floor <= AstralChart.Summit; floor++)
         {
             var s = new AstralRecord { seed = unchecked(seed * 982451653), floor = floor, challenge = seed % 4 };
             AstralChart.Generate(s);

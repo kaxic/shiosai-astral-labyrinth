@@ -9,11 +9,11 @@ public sealed class AstralJourney
     public static readonly string[] Skills = { "星盾の輪", "星線封印", "彗星の遠矢" };
     public static readonly string[] SkillLore = { "周囲2マスの敵を斬り、2手ぶん被害を軽減。", "見えている敵の予兆を消し、2手行動を封じる。", "見えている近敵を6マスまで射抜く。予兆も解除。" };
     public static readonly string[] Challenges = { "通常航路", "薄明航路", "鏡衛航路", "逆星航路" };
-    public static readonly string[] ChallengeLore = { "七層の星環を巡る標準の航路。", "自然な視界が1マス短い。各階の最初の投光は無料。", "鏡眼の増援が出現し、魔物の攻撃が1強くなる。", "閉じた扉と隠し罠が増える。碑で焦点を2回復。" };
-    public static readonly string[] Foes = { "星虫", "鏡眼", "影狼", "封杖の司祭", "星冠の番人" };
-    public static readonly string[] FoeLore = { "近づいて一地点を狙う。赤い印を外せば空振りになる。", "縦横に並ぶ相手へ直線の予兆。射線の横へ出よう。", "数歩先の地点に跳びかかる。着地点をずらすと隙ができる。", "2手後、狙った地点とその上下左右に封印波を放つ。", "広域の星波と直線・一点の攻撃を交互に使う。第四・七層の出口を守る。" };
-    public static readonly string[] Charms = { "彗星の刃片", "常夜の果実", "遠見の方位針", "眠り猫の鈴", "銀燐の鎖帷子", "満ち潮の小瓶", "双星の水晶", "宵砂の灯皿", "巡礼の羽" };
-    public static readonly string[] CharmLore = { "通常攻撃と攻撃系の職技の威力 +2。", "最大体力 +8、今の体力も8回復。", "自然な視界が1マス広がる。", "封印中・予兆中の敵への通常攻撃 +3。", "魔物から受けるダメージを1軽減。", "薬の回復量 +7、薬を1個補充。", "最大焦点 +2、焦点を2回復。", "各階の最初の投光に焦点を消費しない。", "新しい階に到着すると体力をさらに6回復。" };
+    public static readonly string[] ChallengeLore = { "十層の星環を巡る標準の航路。", "自然な視界が1マス短い。各階の最初の投光は無料。", "鏡眼の増援が出現し、魔物の攻撃が1強くなる。", "閉じた扉と隠し罠が増える。碑で焦点を2回復。" };
+    public static readonly string[] Foes = { "星虫", "鏡眼", "影狼", "封杖の司祭", "星冠の番人", "月織りの蛾", "翠環の巻貝", "夜渡り鴉", "鐘殻の蟹", "紫角の鹿" };
+    public static readonly string[] FoeLore = { "近づいて一地点を狙う。赤い印を外せば空振りになる。", "縦横に並ぶ相手へ直線の予兆。射線の横へ出よう。", "数歩先の地点に跳びかかる。着地点をずらすと隙ができる。", "2手後、狙った地点とその上下左右に封印波を放つ。", "広域の星波と直線・一点の攻撃を交互に使う。第四・七・十層の出口を守る。", "羽粉を散らす。狙った地点と斜め四方が光るので縦横にかわす。", "狙いの周囲だけを叩く。輪の中心か、輪の外に留まろう。", "直線上の獲物へ2手後に滑空する。横に外すと着地後は無防備。", "周囲に重い鐘を響かせる。予告中に二歩離れれば安全。", "枝角から狙った地点と縦横2マス先に雷を落とす。隣のマスは安全。" };
+    public static readonly string[] Charms = { "彗星の刃片", "常夜の果実", "遠見の方位針", "眠り猫の鈴", "銀燐の鎖帷子", "満ち潮の小瓶", "双星の水晶", "宵砂の灯皿", "巡礼の羽", "製図士の羽筆", "月織りの長靴", "翡翠の灯座", "静鐘の盾", "星露の琥珀", "風見の歯車", "長夜の油壺", "菫色の携帯箱", "満星の指環" };
+    public static readonly string[] CharmLore = { "通常攻撃と攻撃系の職技の威力 +2。", "最大体力 +8、今の体力も8回復。", "自然な視界が1マス広がる。", "封印中・予兆中の敵への通常攻撃 +3。", "魔物から受けるダメージを1軽減。", "薬の回復量 +7、薬を1個補充。", "最大焦点 +2、焦点を2回復。", "各階の最初の投光に焦点を消費しない。", "新しい階に到着すると体力をさらに6回復。", "未踏の5マスごとに焦点を回復。", "罠のダメージを2軽減。", "碑を灯すたびに体力を5回復。", "待機すると、その敵手番のダメージを軽減。", "魔物を倒すと体力を2回復。", "職技の再使用が1手短くなる。", "投光の持続が2手長くなる。", "新しい階で毎回薬を1個補充。", "焦点が最大なら通常攻撃に威力 +3。" };
     static readonly int[] BaseHp = {38, 29, 33}, BasePower = {5, 4, 4}, BaseFocus = {4, 6, 5};
     public AstralRecord S { get; private set; }
     public int Version { get; private set; }
@@ -102,7 +102,7 @@ public sealed class AstralJourney
         var enemy = At(next);
         if (enemy != null)
         {
-            int damage = Power + ((enemy.frozen > 0 || enemy.intent > 0) ? Has(3) * 3 : 0);
+            int damage = Power + (S.focus == MaxFocus ? 3 * Has(17) : 0) + ((enemy.frozen > 0 || enemy.intent > 0) ? Has(3) * 3 : 0);
             S.log = Foes[enemy.kind] + "に " + damage + " ダメージ。"; Damage(enemy, damage);
             return EndTurn("hit");
         }
@@ -112,20 +112,21 @@ public sealed class AstralJourney
         if (!S.visited[i])
         {
             S.visited[i] = true;
-            if (++S.exploredSteps % 7 == 0 && S.focus < MaxFocus) { S.focus++; S.log = "新しい星図を描いて焦点 +1。"; }
+            if (++S.exploredSteps % (7 - 2 * Has(9)) == 0 && S.focus < MaxFocus) { S.focus++; S.log = "新しい星図を描いて焦点 +1。"; }
         }
         switch (S.tiles[i])
         {
             case AstralTile.Potion: S.potions++; S.tiles[i] = AstralTile.Floor; S.log = "星蜜の薬を拾った。"; break;
             case AstralTile.Crystal: S.focus = Mathf.Min(MaxFocus, S.focus + 2); S.tiles[i] = AstralTile.Floor; S.log = "灯晶を拾い焦点を補充。"; break;
             case AstralTile.Trap:
-                S.hp -= 3; S.tiles[i] = AstralTile.Floor; S.foundTraps[i] = true; S.log = "星棘の罠。体力 −3。"; break;
+                int hurt = 3 - 2 * Has(10); S.hp -= hurt; S.tiles[i] = AstralTile.Floor; S.foundTraps[i] = true; S.log = $"星棘の罠。体力 −{hurt}。"; break;
         }
         return EndTurn("move");
     }
     public bool Wait()
     {
         if (S.mode != AstralMode.Explore) return false;
+        if (Has(12) > 0) S.guard = Mathf.Max(S.guard, 1);
         S.log = "足音を聴き、一手待った。"; return EndTurn("wait");
     }
     public bool Drink()
@@ -138,13 +139,13 @@ public sealed class AstralJourney
     {
         if (S.mode != AstralMode.Explore || (S.focus == 0 && S.freeLight == 0)) return false;
         if (S.freeLight > 0) S.freeLight--; else S.focus--;
-        S.lit = 4; int disarmed = 0;
+        S.lit = 4 + 2 * Has(15); int disarmed = 0;
         for (int i = 0; i < S.tiles.Length; i++)
         {
             if (S.tiles[i] != AstralTile.Trap || AstralChart.Distance(S.hero, AstralChart.Point(i)) > 3) continue;
             S.tiles[i] = AstralTile.Floor; S.foundTraps[i] = true; disarmed++;
         }
-        S.log = $"投光：壁の向こうを3手照らした。解除した罠 {disarmed}。"; return EndTurn("light");
+        S.log = $"投光：壁の向こうを{S.lit - 1}手照らした。解除した罠 {disarmed}。"; return EndTurn("light");
     }
     public bool Skill()
     {
@@ -176,7 +177,7 @@ public sealed class AstralJourney
             target.intent = 0; target.frozen = 1; S.log = "彗星の遠矢で " + Foes[target.kind] + " を射抜いた。";
             Damage(target, Power + 4);
         }
-        S.focus--; S.skillWait = 4; return EndTurn("skill");
+        S.focus--; S.skillWait = 4 - Has(14); return EndTurn("skill");
     }
     public bool Interact()
     {
@@ -185,7 +186,7 @@ public sealed class AstralJourney
         switch (S.tiles[i])
         {
             case AstralTile.Beacon:
-                S.tiles[i] = AstralTile.SpentBeacon; S.beacons++;
+                S.tiles[i] = AstralTile.SpentBeacon; S.beacons++; S.hp = Mathf.Min(MaxHp, S.hp + 5 * Has(11));
                 S.focus = Mathf.Min(MaxFocus, S.focus + (S.challenge == 3 ? 2 : 1));
                 if (S.beacons > 1) S.potions++;
                 // Attunement charts the stair itself, but routes through the fog still need exploring.
@@ -206,7 +207,7 @@ public sealed class AstralJourney
                 if (S.floor == AstralChart.Summit) Finish(true);
                 else
                 {
-                    S.floor++; S.bestFloor = Mathf.Max(S.bestFloor, S.floor); AstralChart.Generate(S);
+                    S.floor++; S.potions += Has(16); S.bestFloor = Mathf.Max(S.bestFloor, S.floor); AstralChart.Generate(S);
                     S.hp = Mathf.Min(MaxHp, S.hp + 9 + 6 * Has(8)); S.focus = Mathf.Min(MaxFocus, S.focus + 2);
                     S.freeLight = S.challenge == 1 || Has(7) > 0 ? 1 : 0;
                     S.log = $"第{S.floor}星環へ。休息で体力と焦点が戻った。";
@@ -237,7 +238,7 @@ public sealed class AstralJourney
     {
         foe.hp -= amount;
         if (foe.hp > 0) return;
-        S.enemies.Remove(foe); S.kills++; S.totalKills++;
+        S.enemies.Remove(foe); S.hp = Mathf.Min(MaxHp, S.hp + 2 * Has(13)); S.kills++; S.totalKills++;
         if (S.kills % 3 == 0 || foe.kind == 4) S.focus = Mathf.Min(MaxFocus, S.focus + 1);
         S.log += Foes[foe.kind] + "を退けた。";
     }
@@ -255,7 +256,7 @@ public sealed class AstralJourney
         if (S.mode == AstralMode.Result) return;
         S.hp = Mathf.Max(0, S.hp); S.won = won; S.mode = AstralMode.Result;
         if (won) { S.wins++; if (S.challenge > 0) { S.challengeBits |= 1 << S.challenge; S.bestChallenge = Mathf.Max(S.bestChallenge, S.challenge); } }
-        S.log = won ? "星冠が灯り、七つの星環がつながった。" : "灯は消えた。描いた航行録は星図庫に残った。";
+        S.log = won ? "星冠が灯り、十の星環がつながった。" : "灯は消えた。描いた航行録は星図庫に残った。";
         Version++;
     }
     void RefreshVision()
@@ -278,6 +279,11 @@ public sealed class AstralJourney
         if (foe.frozen > 0 || foe.intent == 0) return false;
         if (foe.intent == 1) return p == foe.aim;
         if (foe.intent == 3) return AstralChart.Distance(p, foe.aim) <= 1;
+        int dx = Math.Abs(p.x - foe.aim.x), dy = Math.Abs(p.y - foe.aim.y);
+        if (foe.intent == 4) return dx == dy && dx <= 1;
+        if (foe.intent == 5) return dx + dy == 1;
+        if (foe.intent == 6) return Mathf.Max(dx, dy) <= 1;
+        if (foe.intent == 7) return dx + dy == 0 || (dx + dy == 2 && dx * dy == 0);
         if (foe.pos.x == foe.aim.x && p.x == foe.pos.x)
             return (p.y - foe.pos.y) * (p.y - foe.aim.y) <= 0;
         if (foe.pos.y == foe.aim.y && p.y == foe.pos.y)
@@ -296,7 +302,7 @@ public sealed class AstralJourney
                 if (--foe.delay > 0) continue;
                 if (Threatens(foe, S.hero)) taken += Mathf.Max(1, 3 + S.floor / 3 + (foe.kind == 4 ? 2 : 0) +
                     (S.challenge == 2 ? 1 : 0) - Has(4) - (S.guard > 0 ? 3 : 0));
-                if (foe.kind == 2 && AstralChart.Open(S, foe.aim) && foe.aim != S.hero && At(foe.aim) == null) foe.pos = foe.aim;
+                if ((foe.kind == 2 || foe.kind == 7) && AstralChart.Open(S, foe.aim) && foe.aim != S.hero && At(foe.aim) == null) foe.pos = foe.aim;
                 foe.intent = 0; continue;
             }
             int distance = AstralChart.Distance(foe.pos, S.hero);
@@ -310,10 +316,15 @@ public sealed class AstralJourney
             else if (sees && foe.kind == 3 && distance <= 4) intent = 3;
             else if (sees && foe.kind == 1 && aligned && distance <= 6) intent = 2;
             else if (sees && foe.kind == 2 && distance <= 3) intent = 1;
+            else if (sees && foe.kind == 5 && distance <= 3) intent = 4;
+            else if (sees && foe.kind == 6 && distance <= 3) intent = 5;
+            else if (sees && foe.kind == 7 && aligned && distance <= 5) intent = 2;
+            else if (sees && foe.kind == 8 && distance <= 2) intent = 6;
+            else if (sees && foe.kind == 9 && distance <= 4) intent = 7;
             else if (distance == 1) intent = 1;
             if (intent != 0)
             {
-                foe.intent = intent; foe.aim = S.hero; foe.delay = intent == 3 ? 2 : 1; foe.pattern++;
+                foe.intent = intent; foe.aim = intent == 6 ? foe.pos : S.hero; foe.delay = intent >= 3 || foe.kind == 7 ? 2 : 1; foe.pattern++;
                 continue;
             }
             int best = field[AstralChart.Id(foe.pos)]; Vector2Int step = foe.pos;

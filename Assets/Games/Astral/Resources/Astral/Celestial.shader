@@ -5,6 +5,7 @@ Shader "Astral/Celestial Enamel" {
   [NoScaleOffset] _Quartz("Veined amethyst",2D)="gray"{}
   [NoScaleOffset] _Enamel("Constellation enamel",2D)="gray"{}
   [NoScaleOffset] _Visibility("Discovery and threat",2D)="white"{}
+  [NoScaleOffset] _Starleaf("Etched orbital star leaf",2D)="gray"{}
   _Size("Board dimensions",Vector)=(19,15,0,0)
   _Surveyor("Observer position",Vector)=(0,0,0,0)
   _Flash("Starlight",Range(0,1))=0
@@ -16,7 +17,7 @@ Shader "Astral/Celestial Enamel" {
    #pragma vertex vert
    #pragma fragment frag
    #include "UnityCG.cginc"
-   sampler2D _Slate,_Bronze,_Quartz,_Enamel,_Visibility;
+   sampler2D _Starleaf,_Slate,_Bronze,_Quartz,_Enamel,_Visibility;
    float4 _Size,_Surveyor;half _Flash;
    struct app {float4 vertex:POSITION;float3 normal:NORMAL;float4 uv:TEXCOORD0;float2 cell:TEXCOORD1;half4 pigment:COLOR;};
    struct px {float4 pos:SV_POSITION;float4 uv:TEXCOORD0;float3 world:TEXCOORD1;half3 norm:TEXCOORD2;float2 cell:TEXCOORD3;float4 screen:TEXCOORD4;half3 color:COLOR;};
@@ -41,7 +42,10 @@ Shader "Astral/Celestial Enamel" {
     half fill=saturate(dot(n,normalize(half3(.56,.33,.61))));
     half3 lit=saturate(c*(half3(.52,.57,.66)+sun*half3(.46,.42,.39)+fill*half3(.075,.082,.13)));
     half rim=pow(1-saturate(dot(n,normalize(_WorldSpaceCameraPos-i.world))),3);
-    if(t>1.5&&t<2.5)lit+=rim*half3(.077,.080,.068);
+    half3 eye=normalize(_WorldSpaceCameraPos-i.world);
+    half leaf=tex2D(_Starleaf,uv*.53).r;
+    if(t>.5&&t<4.5)lit+=(leaf-.43)*half3(.035,.044,.059);
+    if(t>1.5&&t<2.5)lit+=rim*half3(.077,.080,.068)+pow(saturate(dot(n,normalize(eye+half3(-.43,.82,-.36)))),25)*leaf*half3(.23,.17,.085);
     lit=lerp(lit,saturate(c*1.10),saturate(i.uv.w));
     if(t>5.5){
      float drift=sin(uv.x*.22+uv.y*.10+.69*sin(uv.y*.26));

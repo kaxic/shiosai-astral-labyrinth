@@ -31,7 +31,7 @@ public sealed class AstralRecord
 
 public static class AstralChart
 {
-    public const int Width = 19, Height = 15, Size = Width * Height, Summit = 7;
+    public const int Width = 19, Height = 15, Size = Width * Height, Summit = 10;
     public static readonly Vector2Int[] Steps = { Vector2Int.up, Vector2Int.right, Vector2Int.down, Vector2Int.left };
     public static bool Inside(Vector2Int p) => p.x >= 0 && p.x < Width && p.y >= 0 && p.y < Height;
     public static int Id(Vector2Int p) => p.y * Width + p.x;
@@ -134,6 +134,27 @@ public static class AstralChart
             }
             if (corridor.Count >= 4) doors.Add(corridor[corridor.Count / 2]);
         }
+        // The outer rings are navigable landmarks connecting the six procedural galleries.
+        if (s.floor >= 8)
+        {
+            foreach (var c in centers)
+            {
+                int y = c.y;
+                while (y != Height/2) { Carve(new Vector2Int(c.x,y)); y += Math.Sign(Height/2-y); }
+            }
+            for(int x=2;x<Width-2;x++) Carve(new Vector2Int(x,Height/2));
+            if(s.floor==8 || s.floor==10)
+            {
+                for(int x=3;x<=Width-4;x++){Carve(new Vector2Int(x,3));Carve(new Vector2Int(x,Height-4));}
+                for(int y=3;y<=Height-4;y++){Carve(new Vector2Int(3,y));Carve(new Vector2Int(Width-4,y));}
+            }
+            if(s.floor>=9)
+            {
+                for(int y=2;y<Height-2;y++) Carve(new Vector2Int(Width/2,y));
+                for(int dx=-2;dx<=2;dx++)for(int dy=-2;dy<=2;dy++)
+                    if(Math.Abs(dx)+Math.Abs(dy)<=3)Carve(new Vector2Int(Width/2+dx,Height/2+dy));
+            }
+        }
         s.hero = centers[random.Next(centers.Length)]; s.facing = Vector2Int.up;
         var dist = Distances(s, s.hero, true);
         s.stairs = s.hero;
@@ -159,16 +180,17 @@ public static class AstralChart
         Place(AstralTile.Trap, 2 + s.floor / 3 + (s.challenge == 3 ? 3 : 0));
         void Spawn(int kind, Vector2Int p)
         {
-            int hp = new[] {6, 5, 7, 6, 19}[kind] + s.floor * (kind == 4 ? 2 : 1);
+            int hp = new[] {6, 5, 7, 6, 19, 5, 8, 6, 9, 8}[kind] + Mathf.Min(7,s.floor) * (kind == 4 ? 2 : 1);
             s.enemies.Add(new AstralFoe { id = s.nextId++, kind = kind, pos = p, aim = p, hp = hp, maxHp = hp });
         }
-        if (s.floor == 4 || s.floor == Summit) Spawn(4, s.stairs);
-        int target = 2 + (s.floor + 1) / 2 + (s.challenge == 2 ? 1 : 0);
+        if (s.floor == 4 || s.floor == 7 || s.floor == Summit) Spawn(4, s.stairs);
+        int target = 2 + Mathf.Min(6,s.floor + 1) / 2 + (s.challenge == 2 ? 1 : 0);
         for (int i = 0; i < target && cursor < spare.Count; cursor++)
         {
             int cell = spare[cursor];
             if (dist[cell] < 5 || s.tiles[cell] != AstralTile.Floor) continue;
             int kind = s.floor <= 2 ? random.Next(3) : random.Next(4);
+            if (s.floor >= 3 && i % 2 == 0) kind = 5 + ((s.floor - 3 + i/2) % 5);
             if (s.challenge == 2 && i == 0) kind = 1;
             Spawn(kind, Point(cell)); i++;
         }

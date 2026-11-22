@@ -116,6 +116,7 @@ public sealed class AstralView : MonoBehaviour
         wash=new Material(Resources.Load<Shader>("Astral/StarWash")){name="Observatory contact wash"};
         string[] names={"MoonSlate","OrbitalBronze","Amethyst","StarEnamel"};
         string[] slots={"_Slate","_Bronze","_Quartz","_Enamel"};
+        art.SetTexture("_Starleaf",Resources.Load<Texture2D>("Astral/Starleaf"));
         for(int i=0;i<names.Length;i++)art.SetTexture(slots[i],Resources.Load<Texture2D>("Astral/"+names[i]));
         cameraView=Camera.main;
         if(!cameraView){var lens=Group("Atlas camera",world).gameObject;lens.tag="MainCamera";cameraView=lens.AddComponent<Camera>();}
