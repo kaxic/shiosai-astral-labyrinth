@@ -2,23 +2,32 @@
 <html lang="ja">
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#15272a"><title>C 一手ずつ進む迷宮探索 | 潮彩作品集</title>
+  <meta name="theme-color" content="#15272a"><meta name="description" content="自分が一手動くたびに敵も動く、ターン制の迷宮探索です。足元の予兆を見て、攻撃するか、一歩退くか、その場で待つかを考えながら星碑を探します。">
+  <title>Cローグライクゲーム | 潮彩ゲーム棚</title>
   <link rel="icon" href="icon.png"><link rel="stylesheet" href="player.css"><link rel="stylesheet" href="touch.css"><script defer src="touch.js"></script>
 </head>
 <body>
 <header><a class="imprint" id="library-home" href="https://kaxic.github.io/shiosai-game-library/#C"><span aria-hidden="true">← </span>ゲーム一覧</a><span id="home-status" role="status"></span><a href="https://github.com/kaxic/shiosai-astral-labyrinth">GitHub ↗</a></header>
 <main>
   <section id="stage" aria-label="ゲーム画面">
-    <canvas id="game" data-game="Astral" width="1280" height="720" tabindex="0" aria-label="C 一手ずつ進む迷宮探索のゲーム画面"></canvas>
+    <canvas id="game" data-game="Astral" width="1280" height="720" tabindex="0" aria-label="Cローグライクゲームのゲーム画面"></canvas>
     <div id="cover">
-      <div class="titleblock"><p class="genre">星環の迷宮</p><h1>C 一手ずつ進む迷宮探索</h1><p class="intro">一歩動けば、星の番人も一歩進む。
-消えた星図を探し、眠れる観測所の奥へ。</p>
-        <button id="launch">ゲームを開始 <span aria-hidden="true">›</span></button>
+      <div class="titleblock"><p class="genre">星環の迷宮</p><h1>Cローグライクゲーム</h1><p class="intro">自分が一手動くたびに敵も動く、ターン制の迷宮探索です。足元の予兆を見て、攻撃するか、一歩退くか、その場で待つかを考えながら星碑を探します。</p>
+        <div class="cover-actions"><button id="launch">ゲームを開始 <span aria-hidden="true">›</span></button>
+          <a href="#how-to-play">遊び方を読む <span aria-hidden="true">↓</span></a></div>
         <div id="status" role="status" aria-live="polite"></div><progress id="meter" max="1" value="0" hidden></progress>
       </div>
     </div>
   </section>
-  <div class="bar"><span class="wordmark">C 一手ずつ進む迷宮探索</span><div class="buttons"><button id="help">操作方法</button><button id="full">全画面</button><a id="demo" href="media/demo.mp4" hidden>プレイ映像 ▷</a></div></div>
+  <div class="bar"><span class="wordmark">Cローグライクゲーム</span><div class="buttons"><button id="help">操作方法</button><button id="full">全画面</button><a id="demo" href="media/demo.mp4" hidden>プレイ映像 ▷</a></div></div>
+  <section class="play-guide" id="how-to-play" aria-labelledby="guide-title" tabindex="-1">
+    <h2 id="guide-title">このゲームの遊び方</h2>
+    <div class="guide-columns">
+      <section><h3>最初にすること</h3><p>編成で職業を選んで出発します。初めは接近戦が得意な「星盾衛」が扱いやすいでしょう。矢印で1マスずつ進み、敵のいるマスに踏み込むと攻撃、閉じた扉に進むと開扉になります。</p></section>
+      <section><h3>遊びの流れ</h3><p>各階で星碑を一つ灯すと、先へ進む条件の一つを満たします。宝箱や祭壇へ寄るか、階段を急ぐかは自分次第。戦術図で通路を確かめ、投光で近くの罠を払いながら進みましょう。</p></section>
+      <section><h3>目指すもの</h3><p>第4・第7・第10層では番人を倒す必要があります。十層を踏破した先には、暗さや罠の配置が違う三つの航路があります。「今日の星図」では同じ日・同じ条件の迷宮に別の職業でも挑めます。</p></section>
+    </div>
+  </section>
   <dialog id="guide"><div class="dialogtop"><h2>操作方法</h2><button class="close">閉じる</button></div><p>キーボードとマウスで遊べます。進行はこのブラウザーに保存されます。</p><div id="controls">矢印・WASDで1マス移動。隣の敵に向かって歩くと攻撃。Eで宝箱・祭壇・階段などを調べます。
 
 F 投光偵察　J 職技　Q 薬　Space 待機　Tab 戦術図　B 航行録。

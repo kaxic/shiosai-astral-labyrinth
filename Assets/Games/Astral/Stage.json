@@ -1,10 +1,10 @@
 {
   "key": "Astral",
-  "title": "C 一手ずつ進む迷宮探索",
+  "title": "Cローグライクゲーム",
   "subtitle": "星環の迷宮",
   "english": "THE ASTRAL LABYRINTH",
   "product": "The Astral Labyrinth",
-  "introduction": "一歩動けば、星の番人も一歩進む。\n消えた星図を探し、眠れる観測所の奥へ。",
+  "introduction": "職業を選んで出発。自分が一歩動くと敵も動く。\n各階で星の碑を灯し、迷宮の最深部を目指そう。",
   "controls": "矢印・WASDで1マス移動。隣の敵に向かって歩くと攻撃。Eで宝箱・祭壇・階段などを調べます。\n\nF 投光偵察　J 職技　Q 薬　Space 待機　Tab 戦術図　B 航行録。\n出発前は矢印とEnterで職業を選びます。通常踏破後はCで変則条件を変更できます。",
   "accent": "#D9B77C",
   "ink": "#162138",
