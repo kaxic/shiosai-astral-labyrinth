@@ -1,6 +1,7 @@
 {
   "key": "Astral",
-  "title": "星環の迷宮",
+  "title": "C 一手ずつ進む迷宮探索",
+  "subtitle": "星環の迷宮",
   "english": "THE ASTRAL LABYRINTH",
   "product": "The Astral Labyrinth",
   "introduction": "一歩動けば、星の番人も一歩進む。\n消えた星図を探し、眠れる観測所の奥へ。",

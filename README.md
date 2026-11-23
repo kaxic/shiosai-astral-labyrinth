@@ -1,12 +1,14 @@
-# 星環の迷宮
+# C 一手ずつ進む迷宮探索
+
+星環の迷宮
 
 星の碑を灯しながら、十層の観測所を歩くターン制の探索ゲームです。まず「星盾衛」を選ぶと、盾での接近戦を試せます。「星詠師」は敵の予兆を封じ、「風渡り」は視界と遠矢を使って離れた敵を狙えます。
 
-**[ブラウザーで遊ぶ](https://kaxic.github.io/shiosai-astral-labyrinth/)**
+**[ブラウザーで遊ぶ](https://kaxic.github.io/shiosai-astral-labyrinth/)** ・ [A〜Fのゲーム一覧](https://kaxic.github.io/shiosai-game-library/#C)
 
 [実際のプレイ映像を見る](https://kaxic.github.io/shiosai-astral-labyrinth/media/demo.mp4)
 
-![星環の迷宮のゲーム画面](Guides/Astral.jpg)
+![C 一手ずつ進む迷宮探索のゲーム画面](Guides/Astral.jpg)
 
 [遊び方と手動で拡張する方法](Guides/Astral.md)
 

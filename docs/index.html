@@ -2,23 +2,23 @@
 <html lang="ja">
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#15272a"><title>星環の迷宮 | 潮彩作品集</title>
+  <meta name="theme-color" content="#15272a"><title>C 一手ずつ進む迷宮探索 | 潮彩作品集</title>
   <link rel="icon" href="icon.png"><link rel="stylesheet" href="player.css"><link rel="stylesheet" href="touch.css"><script defer src="touch.js"></script>
 </head>
 <body>
-<header><span class="imprint">潮彩作品集</span><a href="https://github.com/kaxic/shiosai-astral-labyrinth">GitHub ↗</a></header>
+<header><a class="imprint" id="library-home" href="https://kaxic.github.io/shiosai-game-library/#C"><span aria-hidden="true">← </span>ゲーム一覧</a><span id="home-status" role="status"></span><a href="https://github.com/kaxic/shiosai-astral-labyrinth">GitHub ↗</a></header>
 <main>
   <section id="stage" aria-label="ゲーム画面">
-    <canvas id="game" data-game="Astral" width="1280" height="720" tabindex="0" aria-label="星環の迷宮のゲーム画面"></canvas>
+    <canvas id="game" data-game="Astral" width="1280" height="720" tabindex="0" aria-label="C 一手ずつ進む迷宮探索のゲーム画面"></canvas>
     <div id="cover">
-      <div class="titleblock"><p class="genre">ターン制ローグライク</p><h1>星環の迷宮</h1><p class="intro">一歩動けば、星の番人も一歩進む。
+      <div class="titleblock"><p class="genre">星環の迷宮</p><h1>C 一手ずつ進む迷宮探索</h1><p class="intro">一歩動けば、星の番人も一歩進む。
 消えた星図を探し、眠れる観測所の奥へ。</p>
         <button id="launch">ゲームを開始 <span aria-hidden="true">›</span></button>
         <div id="status" role="status" aria-live="polite"></div><progress id="meter" max="1" value="0" hidden></progress>
       </div>
     </div>
   </section>
-  <div class="bar"><span class="wordmark">星環の迷宮</span><div class="buttons"><button id="help">操作方法</button><button id="full">全画面</button><a id="demo" href="media/demo.mp4" hidden>プレイ映像 ▷</a></div></div>
+  <div class="bar"><span class="wordmark">C 一手ずつ進む迷宮探索</span><div class="buttons"><button id="help">操作方法</button><button id="full">全画面</button><a id="demo" href="media/demo.mp4" hidden>プレイ映像 ▷</a></div></div>
   <dialog id="guide"><div class="dialogtop"><h2>操作方法</h2><button class="close">閉じる</button></div><p>キーボードとマウスで遊べます。進行はこのブラウザーに保存されます。</p><div id="controls">矢印・WASDで1マス移動。隣の敵に向かって歩くと攻撃。Eで宝箱・祭壇・階段などを調べます。
 
 F 投光偵察　J 職技　Q 薬　Space 待機　Tab 戦術図　B 航行録。
@@ -36,7 +36,7 @@ const meter=document.getElementById('meter');
 let instance=null;
 const build='Build/';
 const config={
-  dataUrl:build+'3f8aaff2dc488742eff101b8bc19b105.data.unityweb',frameworkUrl:build+'00b8320ffdca3247ae38694e369a2215.framework.js.unityweb',codeUrl:build+'aee90177d51af4319604d5a474f58282.wasm.unityweb',
+  dataUrl:build+'1027560a293320ffa65063b7cf281f1d.data.unityweb',frameworkUrl:build+'35547734ba41d041612e4769bb65a901.framework.js.unityweb',codeUrl:build+'e04df4919d0ab238df9d839e59399503.wasm.unityweb',
   streamingAssetsUrl:'StreamingAssets',companyName:'Shiosai Works',productName:'The Astral Labyrinth',productVersion:'1.0',
   devicePixelRatio:Math.min(1.5,window.devicePixelRatio||1),
   showBanner:function(message,type){ if(type==='error'){statusLine.textContent='読み込みに失敗しました。ページを再読み込みしてください。';console.error(message);} }
@@ -44,12 +44,19 @@ const config={
 async function startGame(){
   launchButton.disabled=true; statusLine.textContent='ゲームを読み込んでいます…';meter.hidden=false;
   try{
-    if(typeof createUnityInstance!=='function')await new Promise((resolve,reject)=>{const s=document.createElement('script'); s.src=build+'631dcd575bb543fb992c815b95303ef8.loader.js';s.onload=resolve;s.onerror=reject;document.head.appendChild(s);});
+    if(typeof createUnityInstance!=='function')await new Promise((resolve,reject)=>{const s=document.createElement('script'); s.src=build+'5968057121675e4348433b72de581349.loader.js';s.onload=resolve;s.onerror=reject;document.head.appendChild(s);});
     instance=await createUnityInstance(canvas,config,value=>{meter.value=value;statusLine.textContent='読み込み中　'+Math.round(100*value)+'%';});
     cover.hidden=true;canvas.focus();document.body.classList.add('playing');
   }catch(e){statusLine.textContent='ゲームを開始できませんでした。WebGL 2に対応したブラウザーで再試行してください。';meter.hidden=true;launchButton.disabled=false;console.error(e);}
 }
 launchButton.addEventListener('click',startGame);
+document.getElementById('library-home').addEventListener('click',event=>{
+  if(!instance||event.button!==0||event.metaKey||event.ctrlKey||event.altKey||event.shiftKey)return;
+  event.preventDefault();
+  document.getElementById('home-status').textContent='保存してゲーム一覧へ戻ります…';
+  instance.SendMessage('ShiosaiLibraryNavigation','GoHome');
+});
+window.shiosaiHomeFailed=()=>{document.getElementById('home-status').textContent='保存に失敗しました。ゲーム一覧をもう一度押してください。';};
 document.getElementById('full').addEventListener('click',()=>{if(instance){instance.SetFullscreen(1);canvas.focus();}else document.getElementById('stage').requestFullscreen?.();});
 document.getElementById('help').addEventListener('click',()=>document.getElementById('guide').showModal());
 document.querySelectorAll('dialog .close').forEach(b=>b.onclick=()=>b.closest('dialog').close());
